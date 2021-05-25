@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.promineotech.crypto.user.entity.User;
 
@@ -17,6 +19,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
+
 
 // @formatter:off
 @RequestMapping("/users")
@@ -47,4 +50,32 @@ public interface CryptoAppUserOperation {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	List<User> getUsers();
+	
+	// @formatter:off
+		@Operation(
+				summary = "Creates crypto user",
+				description = "Creates a mew crypto user",
+				responses = {
+						@ApiResponse(
+								responseCode = "201",
+								description = "A crypto user is created successfully",
+								content = @Content(
+										mediaType = MediaType.APPLICATION_JSON_VALUE,
+										schema = @Schema(implementation = User.class))), 
+						@ApiResponse(
+								responseCode = "400",
+								description = "Invalid input for user data",
+								content = @Content(
+										mediaType = MediaType.APPLICATION_JSON_VALUE)),
+						@ApiResponse(
+								responseCode = "500",
+								description = "Internal server error occurred",
+								content = @Content(
+										mediaType = MediaType.APPLICATION_JSON_VALUE))
+				})
+		// @formatter:on
+	
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	User createUser(@RequestBody User user);
 }
