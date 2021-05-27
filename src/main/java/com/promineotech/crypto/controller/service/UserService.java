@@ -18,4 +18,12 @@ public interface UserService {
 		 * @return - New crypto user 
 		 */
 		User createUser(User user);
+		
+		
+		/**
+		 * 
+		 * @param int - userId for a user entity
+		 * @return - nothing, record is deleted
+		 */
+		void deleteUser(int userId);
 }

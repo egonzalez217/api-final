@@ -27,6 +27,15 @@ public class CryptoAppUserController implements CryptoAppUserOperation{
 	@Override
 	public User createUser(User user) {
 		log.debug("Inside controller layer createUser method");
+		
 		return userService.createUser(user);
+	}
+	
+	@Override
+	public void deleteUser(int userId) {
+		log.debug("Inside controller later deleteUser method");
+		
+		userService.deleteUser(userId);
+		return;
 	}
 }

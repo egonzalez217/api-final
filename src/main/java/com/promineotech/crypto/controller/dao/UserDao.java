@@ -19,4 +19,11 @@ public interface UserDao {
 		 */
 		User createUser(User user);
 		
+		/**
+		 * 
+		 * @param userId = key for which to delete a user from the crypto_user table
+		 * @return nothing, delete a user from the database
+		 */
+		void deleteUser(int userId);
+		
 }

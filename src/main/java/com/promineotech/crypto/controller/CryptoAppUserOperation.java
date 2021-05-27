@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +55,7 @@ public interface CryptoAppUserOperation {
 	// @formatter:off
 		@Operation(
 				summary = "Creates crypto user",
-				description = "Creates a mew crypto user",
+				description = "Creates a new crypto user",
 				responses = {
 						@ApiResponse(
 								responseCode = "201",
@@ -78,4 +79,33 @@ public interface CryptoAppUserOperation {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	User createUser(@RequestBody User user);
+		
+	// @formatter:off
+			@Operation(
+					summary = "Deletes crypto user",
+					description = "Deletes a crypto user from the crypto_user table",
+					responses = {
+							@ApiResponse(
+									responseCode = "200",
+									description = "A crypto user is deleted successfully",
+									content = @Content(
+											mediaType = MediaType.APPLICATION_JSON_VALUE,
+											schema = @Schema(implementation = User.class))), 
+							@ApiResponse(
+									responseCode = "400",
+									description = "Invalid input for userId",
+									content = @Content(
+											mediaType = MediaType.APPLICATION_JSON_VALUE)),
+							@ApiResponse(
+									responseCode = "500",
+									description = "Internal server error occurred",
+									content = @Content(
+											mediaType = MediaType.APPLICATION_JSON_VALUE))
+						})
+			// @formatter:on
+			
+	@DeleteMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	void deleteUser(@RequestBody int userId);
+		
 }

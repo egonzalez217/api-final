@@ -4,7 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,6 +25,10 @@ public class DefaultUserDao implements UserDao {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private JdbcTemplate rawJdbcTemplate;
+	
 	@Override
 	public List<User> getUsers() {
 		log.debug("Inside DAO layer getUsers()");
@@ -72,4 +78,26 @@ public class DefaultUserDao implements UserDao {
 		//@formatter:on
 	}
 
+	@Override
+	public void deleteUser(int userId) {
+		log.debug("Inside DAO layer deleteUser()");
+		
+		// @formatter:off
+		
+		
+		final String sql = "DELETE FROM crypto_user WHERE user_id = ?";
+		
+		//SqlParameterSource sqlParams = 
+			//	new MapSqlParameterSource("user_id", userId);
+		//@formatter:on
+		
+		//KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		//jdbcTemplate.update(sql, sqlParams, keyHolder);
+		rawJdbcTemplate.update(sql, userId);
+		//@formatter:off
+		
+		return;
+		//@formatter:on
+	}
 }

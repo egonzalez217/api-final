@@ -29,5 +29,13 @@ public class DefaultUserService implements UserService {
 		
 		return userDao.createUser(user);
 	}
+	
+	@Override
+	public void deleteUser(int userId) {
+		log.debug("Inside service layer deleteUser");
+		
+		userDao.deleteUser(userId);
+		return;
+	}
 
 }
