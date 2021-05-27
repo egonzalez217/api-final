@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.promineotech.crypto.user.entity.User;
+import com.promineotech.crypto.token.entity.Token;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,24 +22,24 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 
 // @formatter:off
-@RequestMapping("/users")
+@RequestMapping("/tokens")
 @OpenAPIDefinition(
-		info = @Info(title = "User API"),
+		info = @Info(title = "Token API"),
 		servers = {@Server(url = "http://localhost:8080", description = "Local Server")})
 // @formatter:on
-public interface CryptoAppUserOperation {
+public interface CryptoAppTokenOperation {
 
 	// @formatter:off
 	@Operation(
-			summary = "Returns a list of users",
-			description = "Returns a list of users",
+			summary = "Returns a list of tokens",
+			description = "Returns a list of tokens",
 			responses = {
 					@ApiResponse(
 							responseCode = "200",
-							description = "A list of users is returned",
+							description = "A list of tokens is returned",
 							content = @Content(
 									mediaType = MediaType.APPLICATION_JSON_VALUE,
-									schema = @Schema(implementation = User.class))), 
+									schema = @Schema(implementation = Token.class))), 
 					@ApiResponse(
 							responseCode = "500",
 							description = "Internal server error occurred",
@@ -50,22 +49,22 @@ public interface CryptoAppUserOperation {
 	// @formatter:on
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	List<User> getUsers();
+	List<Token> getTokens();
 	
 	// @formatter:off
 		@Operation(
-				summary = "Creates crypto user",
-				description = "Creates a new crypto user",
+				summary = "Creates crypto token",
+				description = "Creates a new crypto token",
 				responses = {
 						@ApiResponse(
 								responseCode = "201",
-								description = "A crypto user is created successfully",
+								description = "A crypto token is created successfully",
 								content = @Content(
 										mediaType = MediaType.APPLICATION_JSON_VALUE,
-										schema = @Schema(implementation = User.class))), 
+										schema = @Schema(implementation = Token.class))), 
 						@ApiResponse(
 								responseCode = "400",
-								description = "Invalid input for user data",
+								description = "Invalid input for token data",
 								content = @Content(
 										mediaType = MediaType.APPLICATION_JSON_VALUE)),
 						@ApiResponse(
@@ -78,34 +77,6 @@ public interface CryptoAppUserOperation {
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	User createUser(@RequestBody User user);
-		
-	// @formatter:off
-			@Operation(
-					summary = "Deletes crypto user",
-					description = "Deletes a crypto user from the crypto_user table (User ID must not reference any Wallet IDs. IF so please delete the record with the associated Wallet Id first).",
-					responses = {
-							@ApiResponse(
-									responseCode = "200",
-									description = "A crypto user is deleted successfully",
-									content = @Content(
-											mediaType = MediaType.APPLICATION_JSON_VALUE,
-											schema = @Schema(implementation = User.class))), 
-							@ApiResponse(
-									responseCode = "400",
-									description = "Invalid input for userId",
-									content = @Content(
-											mediaType = MediaType.APPLICATION_JSON_VALUE)),
-							@ApiResponse(
-									responseCode = "500",
-									description = "Internal server error occurred",
-									content = @Content(
-											mediaType = MediaType.APPLICATION_JSON_VALUE))
-						})
-			// @formatter:on
-			
-	@DeleteMapping
-	@ResponseStatus(code = HttpStatus.OK)
-	void deleteUser(@RequestBody int userId);
+	Token createToken(@RequestBody Token token);
 		
 }
