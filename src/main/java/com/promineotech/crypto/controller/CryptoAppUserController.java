@@ -38,4 +38,11 @@ public class CryptoAppUserController implements CryptoAppUserOperation{
 		userService.deleteUser(userId);
 		return;
 	}
+	
+	@Override
+	public void setUserIsMiner(int userId) {
+		log.debug("Inside controller later setUserIsMiner method");
+		
+		userService.setUserIsMiner(userId);
+	}
 }

@@ -87,17 +87,28 @@ public class DefaultUserDao implements UserDao {
 		
 		final String sql = "DELETE FROM crypto_user WHERE user_id = ?";
 		
-		//SqlParameterSource sqlParams = 
-			//	new MapSqlParameterSource("user_id", userId);
-		//@formatter:on
-		
-		//KeyHolder keyHolder = new GeneratedKeyHolder();
-		
-		//jdbcTemplate.update(sql, sqlParams, keyHolder);
 		rawJdbcTemplate.update(sql, userId);
 		//@formatter:off
 		
 		return;
 		//@formatter:on
+	}
+	
+	@Override
+	public void setUserIsMiner(int userId) {
+		log.debug("Inside DAO layer setUserIsMiner()");
+		
+		//@formatter:off
+		final String sql = "UPDATE crypto_user SET is_miner = \"Miner\" WHERE user_id = ?";
+		//@formatter:on
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		rawJdbcTemplate.update(sql, userId);
+		
+		//@formatter:off
+
+		return;
+				
 	}
 }

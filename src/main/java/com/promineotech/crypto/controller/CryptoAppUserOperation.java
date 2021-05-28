@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -107,5 +108,34 @@ public interface CryptoAppUserOperation {
 	@DeleteMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	void deleteUser(@RequestBody int userId);
+	
+		// @formatter:off
+					@Operation(
+							summary = "Sets crypto user to miner status",
+							description = "Set's the status of a user to a blockchain miner based of the userId that is entered.",
+							responses = {
+									@ApiResponse(
+											responseCode = "200",
+											description = "A crypto user is updated successfully",
+											content = @Content(
+													mediaType = MediaType.APPLICATION_JSON_VALUE,
+													schema = @Schema(implementation = User.class))), 
+									@ApiResponse(
+											responseCode = "400",
+											description = "Invalid input for userId",
+											content = @Content(
+													mediaType = MediaType.APPLICATION_JSON_VALUE)),
+									@ApiResponse(
+											responseCode = "500",
+											description = "Internal server error occurred",
+											content = @Content(
+													mediaType = MediaType.APPLICATION_JSON_VALUE))
+								})
+					// @formatter:on
+						
+	@PutMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	void setUserIsMiner(@RequestBody int userId);
+	
 		
 }

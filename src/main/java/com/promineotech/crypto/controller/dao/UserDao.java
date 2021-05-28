@@ -26,4 +26,10 @@ public interface UserDao {
 		 */
 		void deleteUser(int userId);
 		
+		/**
+		 * 
+		 * @param userId = key for which to set a user to miner status
+		 * @return updated user miner status
+		 */		
+		void setUserIsMiner(int userId);
 }

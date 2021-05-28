@@ -26,4 +26,11 @@ public interface UserService {
 		 * @return - nothing, record is deleted
 		 */
 		void deleteUser(int userId);
+		
+		/**
+		 * 
+		 * @param int - userId for a user entity
+		 * @return - nothing, record is deleted
+		 */
+		void setUserIsMiner(int userId);
 }

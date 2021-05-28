@@ -37,5 +37,13 @@ public class DefaultUserService implements UserService {
 		userDao.deleteUser(userId);
 		return;
 	}
+	
+	@Override
+	public void setUserIsMiner(int userId) {
+		log.debug("Inside service layer setUserIsMiner");
+		
+		userDao.setUserIsMiner(userId);
+		return;
+	}
 
 }
